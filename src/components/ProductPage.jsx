@@ -34,15 +34,15 @@ export const ProductPage = ({ state, dispatch }) => {
             <Grid container spacing={4}>
                 {products.products?.map((product) => (
                     <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
-                        <Card sx={{ maxWidth: 345, border: "1px solid black",maxHeight:450 }}>
+                        <Card sx={{ maxWidth: 345, border: "1px solid black",maxHeight:460 }}>
                             <CardMedia
                                 component="img"
                                 alt={product.title}
-                                height="190"
+                                height="180"
                                 image={product.images[0]}
                             />
-                            <CardContent sx={{height:"140px"}}>
-                                <Typography gutterBottom variant="h6" component="div" >
+                            <CardContent sx={{height:"150px",paddingBottom:2}}>
+                                <Typography gutterBottom variant="h6" component="div" fontSize='18px'>
                                     {product.title}
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary" >
