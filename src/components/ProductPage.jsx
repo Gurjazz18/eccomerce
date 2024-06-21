@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import Container from '@mui/material/Container';
 import DetailsModel from './DetailsModel';
 
 
@@ -29,19 +30,19 @@ export const ProductPage = ({ state, dispatch }) => {
 
 
     return (
-
-        <Box sx={{ flexGrow: 1, mt: 4 }}>
-            <Grid container spacing={4}>
+     <Container>
+        <Box sx={{  mt: 4 }}>
+            <Grid container spacing={2}>
                 {products.products?.map((product) => (
                     <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
-                        <Card sx={{ maxWidth: 345, border: "1px solid black",maxHeight:460 }}>
+                        <Card sx={{ maxWidth: 380, border: "1px solid black",maxHeight:480 }}>
                             <CardMedia
                                 component="img"
                                 alt={product.title}
-                                height="180"
+                                height="160"
                                 image={product.images[0]}
                             />
-                            <CardContent sx={{height:"150px",paddingBottom:2}}>
+                            <CardContent sx={{height:"150px",paddingBottom:4}}>
                                 <Typography gutterBottom variant="h6" component="div" fontSize='18px'>
                                     {product.title}
                                 </Typography>
@@ -52,9 +53,9 @@ export const ProductPage = ({ state, dispatch }) => {
                                     {product.price}$
                                 </Typography>
                             </CardContent>
-                            <CardActions sx={{ display: "flex", justifyContent: "space-between", gap: "10px" }}>
+                            <CardActions sx={{ display: "flex", justifyContent: "space-between", gap: "10px",paddingTop:"5" }}>
                                 {cart.some((item) => item.id === product.id) ? (
-                                    <Button variant="contained" color="error" size="small"
+                                    <Button variant="contained" color="error" sx={{fontSize:"10px",height:"35px"}}
                                         onClick={() =>
                                             dispatch({
                                                 type: "REMOVE_FROM_CART",
@@ -66,7 +67,7 @@ export const ProductPage = ({ state, dispatch }) => {
                                     </Button>
                                 ) : (
                                     <Button
-                                      variant="contained" color="success" size="small"
+                                      variant="contained" color="success" sx={{fontSize:"10px",height:"35px"}}
                                         onClick={() =>
                                             dispatch({
                                                 type: "ADD_TO_CART",
@@ -83,7 +84,7 @@ export const ProductPage = ({ state, dispatch }) => {
                                         Add TO Cart
                                     </Button>
                                 )}
-                                <Button size="small" variant="contained" onClick={() => handleOpen(product)}>View Details</Button>
+                                <Button sx={{fontSize:"10px",height:"35px"}} variant="contained" onClick={() => handleOpen(product)}>View Details</Button>
                             </CardActions>
                         </Card>
                     </Grid>
@@ -92,7 +93,8 @@ export const ProductPage = ({ state, dispatch }) => {
             <DetailsModel open={open} handleClose={handleClose} product={selectedProduct} />
 
         </Box>
-
+          </Container>
+        
     )
 }
 
