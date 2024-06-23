@@ -2,29 +2,24 @@ import * as React from 'react';
 
 
 
-import { Container, Grid, Card, CardContent, CardActions, Button, Typography, Modal, Box, Table, TableBody, TableCell, TableRow, TableContainer, Paper, TextField } from '@mui/material';
-
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
-
-export default function DetailsModel({ open, handleClose, product }) {
+import { Container, Grid,Stack,Item, Card, CardContent, CardActions, Button, Typography, Modal, Box, Table, TableBody, TableCell, TableRow, TableContainer, Paper, TextField } from '@mui/material';
 
 
+
+export default function DetailsModel({ open, handleClose, product={} }) {
+    const{thumbnail}=product
 
     const [review, setRevie] = React.useState(false)
     const [input, setInput] = React.useState('')
     const [rev, setRev] = React.useState([])
-
-   
+    const[thumbnai,setThumnai]=React.useState(thumbnail)
+     console.log(thumbnai,"thumbnai")
+    const GalaryImg= [
+        'https://cdn.prod.website-files.com/5b3213161e5234bf1cfff9e1/65d73398d5fabe160b7c53b5_data%20(1).jpg',
+        'https://cdn.prod.website-files.com/5b3213161e5234bf1cfff9e1/65f17aab753de5bb1ecb5bf4_data%20(5).jpg',
+        'https://cdn.shopify.com/s/files/1/0070/7032/files/Reusable_water_bottle.png?v=1597958401',
+        `${product.thumbnail}`,
+      ]
 
     const handleReview = () => {
         setRevie(true)
@@ -38,19 +33,37 @@ export default function DetailsModel({ open, handleClose, product }) {
         setRevie(false)
     }
 
+    
+
     if (!product) return null;
     return (
         <div>
 
             <Modal open={open} onClose={handleClose}>
-                <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 600, bgcolor: 'background.paper', boxShadow: 24, p: 4, maxHeight: '90vh', overflowY: 'auto' }}>
+                <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 700, bgcolor: 'background.paper', boxShadow: 24, p: 4, maxHeight: '90vh', overflowY: 'auto' }}>
                     <Typography variant="h6" component="h2">
                         {product.title}
                     </Typography>
                     <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
                         {product.description}
                     </Typography>
-                    <img src={product.thumbnail} alt={product.title} style={{ width: '80%', marginBottom: '20px' }} />
+                    <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={2} border={'1px solid grey'} width={'100%'} height={'340px'}>
+                      
+
+                        <Stack direction="column" spacing={2} gridColumn="span 4" height={'340px'}   alignItems={'center'} alignContent={'center'}>
+                            {
+                                GalaryImg.map((url) => (
+                                    <img src={url} alt="product" height={"70px"} border={'1px solid blue'} width={'60%'}
+                                    
+                                    onClick={()=>setThumnai(url)}
+                                    />
+                                ))
+                            }
+                        </Stack>
+                        
+
+                        <Box gridColumn="span 8" sx={{borderLeft: "1px solid black",height:'340px' }}>  <img src={thumbnai} alt={product.title} height='340px' width={'100%'} /></Box>
+                    </Box>
                     <TableContainer component={Paper}>
                         <Table>
                             <TableBody>

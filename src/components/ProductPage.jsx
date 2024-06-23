@@ -9,6 +9,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import DetailsModel from './DetailsModel';
+import SimpleCarousel from './Carousel';
 
 
 export const ProductPage = ({ state, dispatch }) => {
@@ -36,17 +37,13 @@ export const ProductPage = ({ state, dispatch }) => {
                 {products.products?.map((product) => (
                     <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
                         <Card sx={{ maxWidth: 380, border: "1px solid black",maxHeight:480 }}>
-                            <CardMedia
-                                component="img"
-                                alt={product.title}
-                                height="160"
-                                image={product.images[0]}
-                            />
-                            <CardContent sx={{height:"150px",paddingBottom:4}}>
-                                <Typography gutterBottom variant="h6" component="div" fontSize='18px'>
+                           
+                            <SimpleCarousel product={product} />
+                            <CardContent sx={{height:"150px",paddingBottom:4,paddingTop:4}}>
+                                <Typography gutterBottom variant="h6" component="div" fontSize='18px' sx={{lineHeight:"19px"}}>
                                     {product.title}
                                 </Typography>
-                                <Typography variant="body2" color="text.secondary" >
+                                <Typography variant="body2" color="text.secondary" sx={{lineHeight:"19px"}}>
                                     {product.description}
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary">
@@ -90,7 +87,9 @@ export const ProductPage = ({ state, dispatch }) => {
                     </Grid>
                 ))}
             </Grid>
-            <DetailsModel open={open} handleClose={handleClose} product={selectedProduct} />
+          {
+            open &&  <DetailsModel open={open} handleClose={handleClose} product={selectedProduct} />
+          }
 
         </Box>
           </Container>
