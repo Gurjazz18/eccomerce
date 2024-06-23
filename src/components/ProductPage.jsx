@@ -39,12 +39,12 @@ export const ProductPage = ({ state, dispatch }) => {
                         <Card sx={{ maxWidth: 380, border: "1px solid black",maxHeight:480 }}>
                            
                             <SimpleCarousel product={product} />
-                            <CardContent sx={{height:"150px",paddingBottom:4,paddingTop:4}}>
-                                <Typography gutterBottom variant="h6" component="div" fontSize='18px' sx={{lineHeight:"19px"}}>
+                            <CardContent sx={{height:"170px",display:"flex",flexDirection:"column",gap:"10px",paddingTop:"25px"}}>
+                                <Typography gutterBottom variant="h6" component="div"  >
                                     {product.title}
                                 </Typography>
-                                <Typography variant="body2" color="text.secondary" sx={{lineHeight:"19px"}}>
-                                    {product.description}
+                                <Typography variant="body2" color="text.secondary" >
+                                    {product.description.slice(0, 100)}
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary">
                                     {product.price}$
@@ -52,7 +52,7 @@ export const ProductPage = ({ state, dispatch }) => {
                             </CardContent>
                             <CardActions sx={{ display: "flex", justifyContent: "space-between", gap: "10px",paddingTop:"5" }}>
                                 {cart.some((item) => item.id === product.id) ? (
-                                    <Button variant="contained" color="error" sx={{fontSize:"10px",height:"35px"}}
+                                    <Button variant="contained" color="error" sx={{fontSize:"10px",height:"30px"}}
                                         onClick={() =>
                                             dispatch({
                                                 type: "REMOVE_FROM_CART",
@@ -64,7 +64,7 @@ export const ProductPage = ({ state, dispatch }) => {
                                     </Button>
                                 ) : (
                                     <Button
-                                      variant="contained" color="success" sx={{fontSize:"10px",height:"35px"}}
+                                      variant="contained" color="success" sx={{fontSize:"10px",height:"30px"}}
                                         onClick={() =>
                                             dispatch({
                                                 type: "ADD_TO_CART",
